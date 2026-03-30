@@ -1,0 +1,12 @@
+PARTS:
+
+2x24 pin headers, male female, 2.54mm
+15x10k resistor 5w
+8x3xx resistor 5w
+8x7 seg display common cathode
+15x6mm button
+
+CURRENT ISSUES:
+
+Through hole for the FPGA should have been squares. Whoops.
+Board looks bad and could be smaller

@@ -1,0 +1,79 @@
+IO_LOC  "button[14]" 34;
+IO_PORT "button[14]" PULL_MODE=DOWN;
+
+IO_LOC  "button[13]" 33;
+IO_PORT "button[13]" PULL_MODE=DOWN;
+
+IO_LOC  "button[12]" 30;
+IO_PORT "button[12]" PULL_MODE=DOWN;
+
+IO_LOC  "button[11]" 41;
+IO_PORT "button[11]" PULL_MODE=DOWN;
+
+IO_LOC  "button[10]" 35;
+IO_PORT "button[10]" PULL_MODE=DOWN;
+
+IO_LOC  "button[9]" 40;
+IO_PORT "button[9]" PULL_MODE=DOWN;
+
+IO_LOC  "button[8]" 53;
+IO_PORT "button[8]" PULL_MODE=DOWN;
+
+IO_LOC  "button[7]" 51;
+IO_PORT "button[7]" PULL_MODE=DOWN;
+
+IO_LOC  "button[6]" 42;
+IO_PORT "button[6]" PULL_MODE=DOWN;
+
+IO_LOC  "button[5]" 56;
+IO_PORT "button[5]" PULL_MODE=DOWN;
+
+IO_LOC  "button[4]" 55;
+IO_PORT "button[4]" PULL_MODE=DOWN;
+
+IO_LOC  "button[3]" 54;
+IO_PORT "button[3]" PULL_MODE=DOWN;
+
+IO_LOC  "button[2]" 69;
+IO_PORT "button[2]" PULL_MODE=DOWN;
+
+IO_LOC  "button[1]" 68;
+IO_PORT "button[1]" PULL_MODE=DOWN;
+
+IO_LOC  "button[0]" 57;
+IO_PORT "button[0]" PULL_MODE=DOWN;
+
+IO_LOC  "disp[7]" 77;
+
+IO_LOC  "disp[6]" 76;
+
+IO_LOC  "disp[5]" 75;
+
+IO_LOC  "disp[4]" 74;
+
+IO_LOC  "disp[3]" 73;
+
+IO_LOC  "disp[2]" 72;
+
+IO_LOC  "disp[1]" 71;
+
+IO_LOC  "disp[0]" 70;
+
+IO_LOC  "seg[7]" 38;
+
+IO_LOC  "seg[6]" 37;
+
+IO_LOC  "seg[5]" 36;
+
+IO_LOC  "seg[4]" 39;
+
+IO_LOC  "seg[3]" 25;
+
+IO_LOC  "seg[2]" 26;
+
+IO_LOC  "seg[1]" 27;
+
+IO_LOC  "seg[0]" 28;
+
+IO_LOC  "clk" 52;
+IO_PORT "clk" IO_TYPE=LVCMOS33 PULL_MODE=UP;

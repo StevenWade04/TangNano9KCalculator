@@ -34,14 +34,18 @@ function [24:0] convert_bcd_to_bin;
     end
 endfunction
 
-reg [2:0] startDelay;  // delayed pulse
+reg [2:0] startDelayB;  // delayed pulse
+reg [2:0] startDelayD;  // delayed pulse
 reg finalDisp;
 reg subFlag;
 
 always @(posedge clk) begin
 
-    startDelay <= {startDelay[1:0], 1'b0};  // shift
-    startB <= startDelay[2];  // pulse after delay
+    startDelayB <= {startDelayB[1:0], 1'b0};  // shift
+    startB <= startDelayB[2];  // pulse after delay
+
+    startDelayD <= {startDelayD[1:0], 1'b0};  // shift
+    startD <= startDelayD[2];  // pulse after delay
 
 
     case (state)
@@ -49,13 +53,13 @@ always @(posedge clk) begin
             
             if (buttonOut >= 4'd1 && buttonOut <= 4'd9) begin
                 numberA <= (numberA << 4) | buttonOut;
-                bin <= convert_bcd_to_bin((numberA << 4) | buttonOut);  // compute bin now
-                startDelay[0] <= 1'b1;  // this sets output HIGH **next clock**
+                din <= (numberA << 4) | buttonOut;  // set din
+                startDelayD[0] <= 1'b1;  // this sets output HIGH **next clock**
             end
             else if (buttonOut == 4'd11) begin
                 numberA <= (numberA << 4);
-                bin <= convert_bcd_to_bin(numberA << 4);
-                startDelay[0] <= 1'b1;
+                din <= (numberA << 4);
+                startDelayD[0] <= 1'b1;
             end
             else if (buttonOut == 4'd10) begin
                 state <= ENTER_B;
@@ -72,13 +76,13 @@ always @(posedge clk) begin
 
             if (buttonOut >= 4'd1 && buttonOut <= 4'd9) begin
                 numberB <= (numberB << 4) | buttonOut;
-                bin <= convert_bcd_to_bin((numberB << 4) | buttonOut);
-                startDelay[0] <= 1'b1;
+                din <= (numberB << 4) | buttonOut;
+                startDelayD[0] <= 1'b1;
             end
             else if (buttonOut == 4'd11) begin
                 numberB <= (numberB << 4);
-                bin <= convert_bcd_to_bin(numberB << 4);
-                startDelay[0] <= 1'b1;
+                din <= (numberB << 4);
+                startDelayD[0] <= 1'b1;
             end
             else if (buttonOut == 4'd12) begin
                 state <= SHOW_RESULT;
@@ -94,7 +98,7 @@ always @(posedge clk) begin
             else if (finalDisp) begin
                 bin <= numberA;
                 finalDisp <= 0;
-                startDelay[0] = 1'b1;
+                startDelayB[0] = 1'b1;
             end */
 
         end
@@ -104,25 +108,25 @@ always @(posedge clk) begin
             if ((numberA) < (numberB)) state = ERROR;
             else if (finalDisp && ~(subFlag)) begin
                 bin <= convert_bcd_to_bin(numberA) + convert_bcd_to_bin(numberB);
-                startDelay[0] <= 1'b1;
+                startDelayB[0] <= 1'b1;
                 finalDisp <= 1'b0;
             end 
             else if (finalDisp && subFlag) begin
                 bin <= convert_bcd_to_bin(numberA) - convert_bcd_to_bin(numberB);
-                startDelay[0] <= 1'b1;
+                startDelayB[0] <= 1'b1;
                 finalDisp <= 1'b0;
             end 
             else if (buttonOut == 4'd12) begin
                 state <= ENTER_A;
                 bin <= 0;
-                startDelay[0] <= 1'b1;
+                startDelayB[0] <= 1'b1;
                 numberA <= 0;
                 numberB <= 0;
             end
             else if (buttonOut == 4'd10) begin
                 state <= ENTER_B;
                 //bin <= 0;
-                //startDelay[0] <= 1'b1;
+                //startDelayB[0] <= 1'b1;
                 numberA <= numberA + numberB;
                 numberB <= 0;
             end
@@ -133,13 +137,13 @@ always @(posedge clk) begin
             if (|numberA || |numberB) begin
                 numberA <= 0;
                 numberB <= 0;
-                bin <= 25'b1111_1111_1111_1111_1111_1111_1;
-                startDelay[0] <= 1;
+                din <= 32'h00000bcc;
+                startDelayD[0] <= 1;
             end 
             else if (buttonOut == 4'd12) begin
                 state <= ENTER_A;
                 bin <= 0;
-                startDelay[0] <= 1'b1;
+                startDelayB[0] <= 1'b1;
             end
         end
 

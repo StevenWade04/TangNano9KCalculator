@@ -15,4 +15,4 @@ Ideally these issues would be revised in a later iteration, potentially also mak
 
 VERILOG:
 
-Written with the intention of building and programming using LushayLabs IDE. It has not been tested directly using with Yosys's OSS Cad Suite, which the LushayLabs IDE directly uses.
+Written with the intention of building and programming using LushayLabs IDE. In that enviroment the verilog code successfully is built and uploaded to the tang nano board It has not been tested directly using with Yosys's OSS Cad Suite, which the LushayLabs IDE directly uses.

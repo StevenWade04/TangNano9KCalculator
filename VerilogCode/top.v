@@ -33,7 +33,7 @@ reg [3:0] buttonOut;
 numberConverter converter (
     .clk(clk),
     .bin(bin),
-    .din(din), // unused
+    .din(din),
     .d1(digitOne),
     .d2(digitTwo),
     .d3(digitThree),
@@ -44,7 +44,7 @@ numberConverter converter (
     .d8(digitEight),
     .done  (done),
     .startB  (startB),
-    .startD (startD) // unused
+    .startD (startD)
 );
 
 sevenSegDriver driver (

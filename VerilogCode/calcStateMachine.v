@@ -21,9 +21,6 @@ reg startB_next = 0;
 reg [24:0] binOut;
 //reg done;
 
-// Function to convert the bcd input to binary, to be handled by the numberConverter. 
-// This is a poor implementation and must be revised due to causing blowout in synthesis time.
-
 reg [2:0] startDelayB;  // delayed pulse
 reg [2:0] startDelayD;  // delayed pulse
 reg finalDisp, calcWait;

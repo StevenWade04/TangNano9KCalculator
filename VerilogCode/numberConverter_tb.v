@@ -46,12 +46,20 @@ module test;
         #40;
         $display("0     → %d %d %d %d %d %d %d %d", d8,d7,d6,d5,d4,d3,d2,d1);
 
-        // Test 2: 1
-        bin = 25'd1;
+        // Test 2: 5
+        bin = 25'd5;
         startB = 1; #20; startB = 0;
         wait(done);
         #40;
-        $display("1     → %d %d %d %d %d %d %d %d", d8,d7,d6,d5,d4,d3,d2,d1);
+        $display("5     → %d %d %d %d %d %d %d %d", d8,d7,d6,d5,d4,d3,d2,d1);
+
+        bin = 25'b11111_11111_11111_11111_10111;
+        startB = 1; #20; 
+        startB = 0;
+        #40
+        wait(done);
+        #40;
+        $display("-10     → %d %d %d %d %d %d %d %d", d8,d7,d6,d5,d4,d3,d2,d1);
 
         // Test 3: 42
         bin = 25'd67;

@@ -18,7 +18,8 @@ module numberConverter (
 localparam Waiting = 3'd0;
 localparam BcdHandling = 3'd1;
 localparam BinInitialization = 3'd2;
-localparam BinHandling = 3'd3;
+localparam BinHandlingPos = 3'd3;
+localparam BinHandlingNeg = 3'd4;
 
 reg [2:0] state = Waiting;
 reg latchB, latchD;
@@ -70,11 +71,12 @@ always @(posedge clk) begin
         binReg <= bin;
         bcdReg <= 32'd0;
         count   <= 5'd0;
-        state <= BinHandling;
+        if (!bin[24]) state <= BinHandlingPos;
+        else state <= BinHandlingNeg;
 
     end
 
-    BinHandling: begin
+    BinHandlingPos: begin
 
         // Double-dabble binary to BCD converter
 
@@ -98,6 +100,43 @@ always @(posedge clk) begin
             count <= count + 1'b1;
         end
         else begin
+            state <= Waiting;
+            done <= 1'b1;
+        end
+
+    end
+
+    BinHandlingNeg: begin
+
+        if (binReg[24] && !count) begin
+            binReg <= ~binReg + 1;
+        end else if (count < 25) begin
+            bcdNext = bcdReg; // blocking assignment (combinational temp)
+
+            // Add 3 step
+            if (bcdNext[ 3: 0] >= 5) bcdNext[ 3: 0] = bcdNext[ 3: 0] + 3;
+            if (bcdNext[ 7: 4] >= 5) bcdNext[ 7: 4] = bcdNext[ 7: 4] + 3;
+            if (bcdNext[11: 8] >= 5) bcdNext[11: 8] = bcdNext[11: 8] + 3;
+            if (bcdNext[15:12] >= 5) bcdNext[15:12] = bcdNext[15:12] + 3;
+            if (bcdNext[19:16] >= 5) bcdNext[19:16] = bcdNext[19:16] + 3;
+            if (bcdNext[23:20] >= 5) bcdNext[23:20] = bcdNext[23:20] + 3;
+            if (bcdNext[27:24] >= 5) bcdNext[27:24] = bcdNext[27:24] + 3;
+            if (bcdNext[31:28] >= 5) bcdNext[31:28] = bcdNext[31:28] + 3;
+
+            // Shift 
+            bcdReg <= {bcdNext[30:0], binReg[24]};
+            binReg <= {binReg[23:0], 1'b0};
+
+            count <= count + 1'b1;
+        end
+        else begin
+            if (!bcdReg[31:4]) bcdReg[7:4] <= 4'hd;
+            else if (!bcdReg[31:8]) bcdReg[11:8] <= 4'hd;
+            else if (!bcdReg[31:12]) bcdReg[15:12] <= 4'hd;
+            else if (!bcdReg[31:16]) bcdReg[19:16] <= 4'hd;
+            else if (!bcdReg[31:20]) bcdReg[23:20] <= 4'hd;
+            else if (!bcdReg[31:24]) bcdReg[27:24] <= 4'hd;
+            else if (!bcdReg[31:28]) bcdReg[31:28] <= 4'hd;
             state <= Waiting;
             done <= 1'b1;
         end

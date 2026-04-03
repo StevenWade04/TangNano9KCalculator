@@ -53,7 +53,7 @@ always @(posedge clk) begin
             state <= WAITING;
         end
         SUBTRACTION: begin
-            binOut <= 25'b00000_00000_00000_00000_00001;
+            binOut <= convert_bcd_to_bin(numberA) - convert_bcd_to_bin(numberB);
             done <= 1;
             state <= WAITING;
         end

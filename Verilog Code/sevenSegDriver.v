@@ -50,11 +50,11 @@ always @(*) begin
         4'h8: seg = 8'b01111111;
         4'h9: seg = 8'b01101111;
         4'hA: seg = 8'b00000000; // Null character
-        4'hB: seg = 8'b01111001; // Hex B - F are unused, possibly could use for displaying error, negatives, ect.
-        4'hC: seg = 8'b01010000;
-        4'hD: seg = 8'b00000000;
-        4'hE: seg = 8'b00000000;
-        4'hF: seg = 8'b00000000;
+        4'hB: seg = 8'b01111001; // Character E
+        4'hC: seg = 8'b01010000; // Character r
+        4'hD: seg = 8'b01000000; // Negative sign (Currently unused)
+        4'hE: seg = 8'b00000000; // Unused
+        4'hF: seg = 8'b00000000; // Unused
         default: seg = 8'b11111111;
     endcase
 end

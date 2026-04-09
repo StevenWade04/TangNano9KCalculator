@@ -32,24 +32,8 @@ always @(posedge clk) begin
         WAITING: begin
             done <= 0;
             if (calcWait) begin
-                case (operationFlag)
-                    passedAdd: begin
-                        state <= CONVERT;
-                        opperand <= passedAdd;
-                    end
-                    passedSub: begin
-                        state <= CONVERT;
-                        opperand <= passedSub;
-                    end
-                    passedMul: begin
-                        state <= CONVERT;
-                        opperand <= passedMul;
-                    end
-                    passedDiv: begin
-                        state <= CONVERT;
-                        opperand <= passedDiv;
-                    end
-                endcase
+                state <= CONVERT;
+                opperand <= operationFlag;
             end else begin 
                 opperand <= 0;
                 counter <= 0;

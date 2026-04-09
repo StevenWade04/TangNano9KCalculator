@@ -66,6 +66,14 @@ always @(posedge clk) begin
                 state <= ENTER_B;
                 operationFlag <= 2'd1;
             end 
+            else if (buttonOut == 4'd14) begin // Multiplication
+                state <= ENTER_B;
+                operationFlag <= 2'd2;
+            end
+            else if (buttonOut == 4'd15) begin // Division
+                state <= ENTER_B;
+                operationFlag <= 2'd3;
+            end
             else if (|(numberA[31:28])) state <= ERROR;
         end
 

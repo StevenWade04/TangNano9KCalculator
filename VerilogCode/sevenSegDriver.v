@@ -53,7 +53,7 @@ always @(*) begin
         4'hB: seg = 8'b01111001; // Character E
         4'hC: seg = 8'b01010000; // Character r
         4'hD: seg = 8'b01000000; // Negative sign (Currently unused)
-        4'hE: seg = 8'b00000000; // Unused
+        4'hE: seg = 8'b01011100; // Character o
         4'hF: seg = 8'b00000000; // Unused
         default: seg = 8'b11111111;
     endcase

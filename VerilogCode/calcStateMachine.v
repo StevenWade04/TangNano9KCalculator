@@ -135,7 +135,7 @@ always @(posedge clk) begin
             if (|numberA || |numberB) begin
                 numberA <= 0;
                 numberB <= 0;
-                din <= 32'h00000bcc;
+                din <= 32'h000bccec;
                 startDelayD[0] <= 1;
             end 
             else if (buttonOut == 4'd12) begin

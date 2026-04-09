@@ -65,12 +65,12 @@ always @(posedge clk) begin
             state <= WAITING;
         end
         MULTIPLICATION: begin
-            binOut <= 25'b00000_00000_00000_00000_00010;
+            binOut <= binA * binB;
             done <= 1;
             state <= WAITING;
         end
         DIVISION: begin
-            binOut <= 25'b00000_00000_00000_00000_00011;
+            binOut <= 25'b00000_00000_00000_00000_11111;
             done <= 1;
             state <= WAITING;
         end
